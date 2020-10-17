@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList RestAPI</title>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+</head>
+<body class="p-5 alert-primary ">
+<!-- main task-box -->
+  <div class="jumbotron m-auto text-center w-50 alert-dismissible alert-info">
+    <h1 class="display-3">To Do List</h1>
+    <p class="lead">For home, work & everything in between</p>
+    <hr class="my-4">
+    
+    <div class="form-group">
+      <label class="col-form-label col-form-label-lg" for="inputLarge">Add your task</label>
+      <input class="form-control form-control-lg" type="text" placeholder="|" id="inputLarge">
+    </div> 
+    
+    <p class="lead">
+      <a class="btn btn-info btn-lg" href="#" role="button">Save</a>
+    </p>
+
+    <table class="table table-hover">
+      <!-- <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Column heading</th>
+          <th scope="col">Column heading</th>
+          <th scope="col">Column heading</th>
+        </tr>
+      </thead> -->
+      <tbody>
+        <tr class="table-default">
+          <th scope="row"><i class="fas fa-check-circle" style="font-size: 24px; color: #17a2b8;"></i></th>
+          <td>Column content</td>
+          <td>Column content</td>
+          <td><i class="fas fa-times" style="font-size: 24px; color: #17a2b8;"></i></td>
+        </tr>
+      </tbody>
+    </table> 
+    
+  </div>
+
+</body>
+</html>
