@@ -2,7 +2,8 @@
 
 const form = document.querySelector('.form-group');
 const taskInput = document.getElementById('inputLarge');
-const taskList = document.querySelector('table');
+const taskList = document.querySelector('tbody');
+console.log(taskList);
 
 // Load all event listeners
 loadAllEventListeners();
@@ -10,6 +11,10 @@ loadAllEventListeners();
 function loadAllEventListeners() {
   // Add task
   form.addEventListener('submit', addTask);
+  // Remove Task
+  taskList.addEventListener('click', removeTask);
+  // Done Task
+  taskList.addEventListener('click', doneTask);
 }
 
 // Add task
@@ -18,17 +23,15 @@ function addTask(e) {
   if(taskInput.value === '') {
     alert("Add a task");
   }
-  // create tbody
-  const tBody = document.createElement('tbody');
 
-  // create tr element
+  // create table-row element
   const tr = document.createElement('tr');
   tr.className = 'table-light';
 
   // create check-box icon
   const tdCheckBox = document.createElement('td');
-  tdCheckBox.className = 'text-right';
-  tdCheckBox.innerHTML = '<i class="fas fa-check-circle " style="font-size: 24px; color: #17a2b8;"></i>';
+  tdCheckBox.className = 'text-right check-item';
+  tdCheckBox.innerHTML = '<i class="fas fa-check-circle"></i>';
   tr.appendChild(tdCheckBox);
 
   // create field with task 
@@ -39,17 +42,30 @@ function addTask(e) {
 
   // create delete icon
   const tdDelete = document.createElement('td');
-  tdDelete.className = 'text-right';
-  tdDelete.innerHTML = '<i class="fas fa-times" style="font-size: 24px; color: #17a2b8;"></i>';
+  tdDelete.className = 'text-right delete-item';
+  tdDelete.innerHTML = '<i class="fas fa-times"></i>';
   tr.appendChild(tdDelete);
 
   // add new td to task list
-  tBody.appendChild(tr);
-  console.log(tr);
-
-  // add new row to table body
-  taskList.appendChild(tBody)
+  taskList.appendChild(tr);
   
   // clear the input
   taskInput.value = '';
 }
+
+// Remove Task
+function removeTask(e) {
+  if(e.target.parentElement.classList.contains('delete-item')) {
+    if (confirm('Are you sure?')) {
+      e.target.parentElement.parentElement.remove();
+    }
+  }
+}
+
+// Check Done Task
+function doneTask(e) {
+  if(e.target.parentElement.classList.contains('check-item')) {
+    document.querySelector('.fa-check-circle').classList.add('done');
+  }
+}
+

@@ -1,0 +1,28 @@
+/* check-box item */
+.fa-check-circle {
+  font-size: 24px;
+  color: #17a2b8;
+}
+
+.done {
+  pointer-events: none;
+  font-size: 24px;
+  color: #28a745;
+}
+
+.fa-check-circle:hover {
+  color: #147988;
+}
+
+
+
+/* delete icon */
+.fa-times {
+  font-size: 24px;
+  color: #17a2b8;
+}
+
+.fa-times:hover {
+  color: #dc3545;
+  -webkit-text-stroke: 1px #dc3545;
+}
