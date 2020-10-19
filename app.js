@@ -63,39 +63,39 @@ function getTasks() {
 function addTask(e) {
   e.preventDefault();
   if(taskInput.value === '') {
-    alert("Add a task");
-  }
+    showAlert("Please, add a task");
+  } else {
+      // create table-row element
+      const tr = document.createElement('tr');
+      tr.className = 'table-light';
 
-  // create table-row element
-  const tr = document.createElement('tr');
-  tr.className = 'table-light';
+      // create check-box icon
+      const tdCheckBox = document.createElement('td');
+      tdCheckBox.className = 'text-right check-item';
+      tdCheckBox.innerHTML = '<i class="fas fa-check-circle"></i>';
+      tr.appendChild(tdCheckBox);
 
-  // create check-box icon
-  const tdCheckBox = document.createElement('td');
-  tdCheckBox.className = 'text-right check-item';
-  tdCheckBox.innerHTML = '<i class="fas fa-check-circle"></i>';
-  tr.appendChild(tdCheckBox);
+      // create field with task 
+      const tdTask = document.createElement('td');
+      tdTask.className = 'text-left';
+      tdTask.appendChild(document.createTextNode(taskInput.value));
+      tr.appendChild(tdTask);
 
-  // create field with task 
-  const tdTask = document.createElement('td');
-  tdTask.className = 'text-left';
-  tdTask.appendChild(document.createTextNode(taskInput.value));
-  tr.appendChild(tdTask);
+      // create delete icon
+      const tdDelete = document.createElement('td');
+      tdDelete.className = 'text-right delete-item';
+      tdDelete.innerHTML = '<i class="fas fa-times"></i>';
+      tr.appendChild(tdDelete);
 
-  // create delete icon
-  const tdDelete = document.createElement('td');
-  tdDelete.className = 'text-right delete-item';
-  tdDelete.innerHTML = '<i class="fas fa-times"></i>';
-  tr.appendChild(tdDelete);
+      // add new td to task list
+      taskList.appendChild(tr);
 
-  // add new td to task list
-  taskList.appendChild(tr);
-
-  // store new task in local storage
-  storeTaskInLocalStorage(taskInput.value);
-  
-  // clear the input
-  taskInput.value = '';
+      // store new task in local storage
+      storeTaskInLocalStorage(taskInput.value);
+      
+      // clear the input
+      taskInput.value = '';
+    }
 }
 
 // Store task in Local Storage
@@ -115,10 +115,9 @@ function storeTaskInLocalStorage(task) {
 // Remove Task
 function removeTask(e) {
   if(e.target.parentElement.classList.contains('delete-item')) {
-    if (confirm('Are you sure?')) {
       e.target.parentElement.parentElement.remove();
       removeTaskFromLocalStorage(e.target.parentElement.parentElement);
-    }
+      showAlert('Your task deleted');
   }
 }
 
@@ -145,7 +144,24 @@ function removeTaskFromLocalStorage(taskItem) {
 function doneTask(e) {
   if(e.target.parentElement.classList.contains('check-item')) {
     console.log(1);
-    document.querySelector('.fa-check-circle').classList.add('done');
+    e.target.classList.add('done');
   }
+}
+
+// Show alert
+
+function showAlert(message) {
+  // Add alert-message
+  const div = document.createElement('div');
+  div.className = `alert alert-dismissible alert-warning text-primary`;
+  div.appendChild(document.createTextNode(message));
+  const container = document.querySelector('.jumbotron');
+  const form = document.querySelector('form');
+  container.insertBefore(div, form);
+
+  // No-display alert message after 3 sec
+  setTimeout(function(){
+    document.querySelector('.alert').remove();
+  }, 2000);
 }
 
